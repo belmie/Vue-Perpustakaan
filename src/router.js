@@ -1,11 +1,11 @@
-import Tetapan from "./views/penggurusan-tetapan";
+
+import PenggurusanTetapan from "./views/penggurusan-tetapan.vue";
 import PenggurusanLaporan from "./views/penggurusan-laporan.vue";
 import PenggurusanSuratJaminan from "./views/penggurusan-surat-jaminan";
 import PenggurusanTempahanBilik from "./views/penggurusan-tempahan-bilik";
 import PenggurusanMetadata from "./views/penggurusan-metadata";
 import RekodPentadbiran from "./views/rekod-pentadbiran";
 import RekodSumberManusia from "./views/rekod-sumber-manusia";
-import RekodPentadbiran from "./views/rekod-pentadbiran";
 import PenggurusanCuti from "./views/penggurusan-cuti";
 import LogAktivitiKakitangan from "./views/log-aktiviti-kakitangan";
 import InfoSemasa from "./views/info-semasa";
@@ -17,7 +17,6 @@ import Profile from "./views/profile-page";
 import Tasks from "./views/tasks-page";
 import defaultLayout from "./layouts/side-nav-outer-toolbar";
 import simpleLayout from "./layouts/single-card";
-import PenggurusanTetapan from "./views/penggurusan-tetapan.vue";
 
 function loadView(view) {
   return () => import (/* webpackChunkName: "login" */ `./views/${view}.vue`)
@@ -140,10 +139,19 @@ const router = new createRouter({
         layout: defaultLayout
       },
       component: RekodPentadbiran
+    },
+    {
+      path: "/sumber",
+      name: "sumber",
+      meta: {
+        requiresAuth: true,
+        layout: defaultLayout
+      },
+      component: RekodSumberManusia
     }, 
     {
       path: "/metadata",
-      name: "metadata",
+      name: "Penggurusan Metadata",
       meta: {
         requiresAuth: true,
         layout: defaultLayout

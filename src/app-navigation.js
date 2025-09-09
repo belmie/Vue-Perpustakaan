@@ -1,71 +1,71 @@
 export default [
   {
-    text: "Home",
+    text: "menu.home",
     path: "/home",
     icon: "home"
   },
   {
-    text: "Examples",
+    text: "menu.examples",
     icon: "folder",
     items: [
       {
-        text: "Profile",
+        text: "menu.profile",
         path: "/profile"
       },
       {
-        text: "Tasks",
+        text: "menu.tasks",
         path: "/tasks"
       }
     ]
-  }, 
+  },
   {
-    text: 'Info',
-    path: '/info',
-    icon: 'folder'
-  }, 
+    text: "menu.info",
+    path: "/info",
+    icon: "folder"
+  },
   {
-    text: 'Log',
-    path: '/log',
-    icon: 'folder'
-  }, 
+    text: "menu.log",
+    path: "/log",
+    icon: "folder"
+  },
   {
-    text: 'Cuti',
-    path: '/cuti',
-    icon: 'folder'
-  }, 
+    text: "menu.cuti",
+    path: "/cuti",
+    icon: "folder"
+  },
   {
-    text: 'Rekod',
-    path: '/rekod',
-    icon: 'folder'
-  }, 
+    text: "menu.rekod",
+    path: "/rekod",
+    icon: "folder"
+  },
   {
-    text: 'Metadata',
-    path: '/metadata',
-    icon: 'folder'
-  }, 
+    text: "menu.metadata",
+    path: "/metadata",
+    icon: "folder"
+  },
   {
-    text: 'Tempahan',
-    path: '/tempahan',
-    icon: 'folder'
-  }, 
+    text: "menu.tempahan",
+    path: "/tempahan",
+    icon: "folder"
+  },
   {
-    text: 'Penggurusan',
-    path: '/penggurusan',
-    icon: 'folder'
-  }, 
+    text: "menu.pengurusan",
+    path: "/penggurusan",
+    icon: "folder"
+  },
   {
-    text: 'Surat',
-    path: '/surat',
-    icon: 'folder'
-  }, 
+    text: "menu.surat",
+    path: "/surat",
+    icon: "folder"
+  },
   {
-    text: 'Laporan',
-    path: '/laporan',
-    icon: 'folder'
-  }, 
+    text: "menu.laporan",
+    path: "/laporan",
+    icon: "folder"
+  },
   {
-    text: 'Tetapan',
-    path: '/tetapan',
-    icon: 'folder'
+    text: "menu.tetapan",
+    path: "/tetapan",
+    icon: "folder"
   }
-  ];
+];

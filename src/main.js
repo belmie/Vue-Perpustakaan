@@ -9,10 +9,12 @@ import themes from "devextreme/ui/themes";
 
 import App from "./App";
 import appInfo from "./app-info";
+import i18n from "./i18n";
 
 themes.initialized(() => {
     const app = createApp(App);
     app.use(router);
     app.config.globalProperties.$appInfo = appInfo;
+    app.use(i18n);
     app.mount('#app');
 });

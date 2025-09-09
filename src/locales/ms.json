@@ -1,0 +1,36 @@
+{
+  "welcome": "Welcome ✨",
+  "login": "Login",
+  "logout": "Logout",
+  "profile": "Profile",
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "users": "Users",
+  "books": "Books",
+  "borrowings": "Borrowings",
+  "returns": "Returns",
+  "settings": "Settings",
+  "language": "Language",
+  "theme": "Theme",
+  "about": "About",
+  "contact": "Contact",
+  "help": "Help",
+
+  "menu": {
+    "home": "Halaman Utama",
+    "examples": "Contoh",
+    "profile": "Profil",
+    "tasks": "Tugas",
+    "info": "Info",
+    "log": "Log",
+    "cuti": "Cuti",
+    "rekod": "Rekod",
+    "metadata": "Metadata",
+    "tempahan": "Tempahan Bilik",
+    "penggurusan": "Penggurusan",
+    "surat": "Surat",
+    "laporan": "Laporan",
+    "tetapan": "Tetapan"
+  }
+
+}

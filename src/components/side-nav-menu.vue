@@ -20,12 +20,13 @@
 </template>
 
 <script>
-import DxTreeView from 'devextreme-vue/tree-view';
-import { sizes } from '../utils/media-query';
-import navigation from '../app-navigation';
-import { onMounted, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { themeService } from '../theme-service';
+import DxTreeView from "devextreme-vue/tree-view";
+import { sizes } from "../utils/media-query";
+import navigation from "../app-navigation";
+import { onMounted, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { themeService } from "../theme-service";
+import { useI18n } from "vue-i18n";
 
 export default {
   props: {
@@ -34,19 +35,29 @@ export default {
   setup(props, context) {
     const route = useRoute();
     const router = useRouter();
+    const { t } = useI18n();
 
-    const isLargeScreen = sizes()['screen-large'];
-    const items = navigation.map((item) => {
-      if(item.path && !(/^\//.test(item.path))){
-        item.path = `/${item.path}`;
-      }
-      return {...item, expanded: isLargeScreen}
-    });
+    const isLargeScreen = sizes()["screen-large"];
 
+    // 🔹 recursive translate
+    function translateNav(navItems) {
+      return navItems.map((item) => {
+        const path = item.path && !/^\//.test(item.path) ? `/${item.path}` : item.path;
+        return {
+          ...item,
+          text: t(item.text),
+          path,
+          expanded: isLargeScreen,
+          items: item.items ? translateNav(item.items) : null
+        };
+      });
+    }
+
+    const items = ref(translateNav(navigation));
     const treeViewRef = ref(null);
-    const swatchClassName = ref('');
+    const swatchClassName = ref("");
 
-    function forwardClick (...args) {
+    function forwardClick(...args) {
       context.emit("click", args);
     }
 
@@ -55,16 +66,13 @@ export default {
         return;
       }
       router.push(e.itemData.path);
-
-      const pointerEvent = e.event;
-      pointerEvent.stopPropagation();
+      e.event.stopPropagation();
     }
 
-    function updateSelection () {
+    function updateSelection() {
       if (!treeViewRef.value || !treeViewRef.value.instance) {
         return;
       }
-
       treeViewRef.value.instance.selectItem(route.path);
       treeViewRef.value.instance.expandItem(route.path);
     }
@@ -76,7 +84,7 @@ export default {
       }
     });
 
-
+    // 🔹 update bila route tukar
     watch(
       () => route.path,
       () => {
@@ -84,22 +92,22 @@ export default {
       }
     );
 
+    // 🔹 update bila theme tukar
     watch(
       () => themeService.isDark,
       () => {
-        swatchClassName.value = themeService.isDark.value ? 'dx-swatch-additional-dark' : 'dx-swatch-additional';
+        swatchClassName.value = themeService.isDark.value
+          ? "dx-swatch-additional-dark"
+          : "dx-swatch-additional";
       },
       { immediate: true }
     );
 
+    // 🔹 update bila language tukar
     watch(
-      () => props.compactMode,
+      () => t("menu.home"), // reactive trigger
       () => {
-        if (props.compactMode) {
-          treeViewRef.value.instance.collapseAll();
-        } else {
-          updateSelection();
-        }
+        items.value = translateNav(navigation);
       }
     );
 
@@ -109,7 +117,7 @@ export default {
       forwardClick,
       handleItemClick,
       updateSelection,
-      swatchClassName,
+      swatchClassName
     };
   },
   components: {

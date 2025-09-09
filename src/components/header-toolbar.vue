@@ -1,6 +1,7 @@
 <template>
   <header class="header-component">
     <dx-toolbar class="header-toolbar">
+      <!-- menu button -->
       <dx-item
         :visible="menuToggleEnabled"
         location="before"
@@ -15,32 +16,45 @@
         </template>
       </dx-item>
 
+      <!-- title -->
       <dx-item
         v-if="title"
         location="before"
         css-class="header-title dx-toolbar-label"
       >
-        <div>{{ title }} </div>
+        <div>{{ title }}</div>
       </dx-item>
 
+      <!-- theme switcher -->
       <dx-item location="after">
         <div><theme-switcher /></div>
       </dx-item>
 
+      <!-- 🔹 language switcher -->
+      <dx-item location="after">
+        <dx-select-box
+          :items="languages"
+          display-expr="label"
+          value-expr="code"
+          v-model="localeValue"
+          width="120"
+        />
+      </dx-item>
+
+      <!-- user panel -->
       <dx-item
         location="after"
         locate-in-menu="auto"
         menu-item-template="menuUserItem"
       >
         <template #default>
-          <user-panel :menu-items="userMenuItems" menuMode="context"/>
+          <user-panel :menu-items="userMenuItems" menuMode="context" />
         </template>
       </dx-item>
 
       <template #menuUserItem>
-        <user-panel :menu-items="userMenuItems" menuMode="list"/>
+        <user-panel :menu-items="userMenuItems" menuMode="list" />
       </template>
-
     </dx-toolbar>
   </header>
 </template>
@@ -48,12 +62,13 @@
 <script>
 import DxButton from "devextreme-vue/button";
 import DxToolbar, { DxItem } from "devextreme-vue/toolbar";
+import DxSelectBox from "devextreme-vue/select-box";
 import auth from "../auth";
-import { useRouter, useRoute } from 'vue-router';
-import { ref } from 'vue';
-
+import { useRouter, useRoute } from "vue-router";
+import { ref, watch } from "vue";
 import UserPanel from "./user-panel";
-import ThemeSwitcher from './theme-switcher.vue';
+import ThemeSwitcher from "./theme-switcher.vue";
+import { useI18n } from "vue-i18n";
 
 export default {
   props: {
@@ -66,19 +81,28 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const email = ref("");
-    auth.getUser().then((e) => email.value = e.data.email);
+    const { t, locale } = useI18n();
 
-    const userMenuItems = [{
-      text: "Profile",
-      icon: "user",
-      onClick: onProfileClick
-    },
-      {
-        text: "Logout",
-        icon: "runner",
-        onClick: onLogoutClick
-      }];
+    const email = ref("");
+    auth.getUser().then((e) => (email.value = e.data.email));
+
+     // 🔹 list of supported languages + flags
+    const languages = [
+      { code: "en", label: "🇬🇧 English" },
+      { code: "ms", label: "🇲🇾 Melayu" },
+      { code: "ja", label: "🇯🇵 日本語" }
+    ];
+
+    // 🔹 load saved locale from localStorage, fallback ke current locale
+    const savedLocale = localStorage.getItem("app-locale") || locale.value;
+    const localeValue = ref(savedLocale);
+    locale.value = savedLocale;
+
+    // 🔹 update vue-i18n locale + save ke localStorage bila tukar
+    watch(localeValue, (newVal) => {
+      locale.value = newVal;
+      localStorage.setItem("app-locale", newVal);
+    });
 
     function onLogoutClick() {
       auth.logOut();
@@ -95,9 +119,25 @@ export default {
       });
     }
 
+    const userMenuItems = [
+      {
+        text: t("profile"),
+        icon: "user",
+        onClick: onProfileClick
+      },
+      {
+        text: t("logout"),
+        icon: "runner",
+        onClick: onLogoutClick
+      }
+    ];
+
     return {
       email,
-      userMenuItems
+      t,
+      userMenuItems,
+      languages,
+      localeValue
     };
   },
   components: {
@@ -105,10 +145,12 @@ export default {
     DxButton,
     DxToolbar,
     DxItem,
+    DxSelectBox,
     UserPanel
   }
 };
 </script>
+
 
 <style lang="scss">
 @use "../dx-styles.scss" as *;

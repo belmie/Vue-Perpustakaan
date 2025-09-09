@@ -1,0 +1,37 @@
+{
+  "welcome": "Welcome ✨",
+  "login": "Login",
+  "logout": "Logout",
+  "profile": "Profile",
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "users": "Users",
+  "books": "Books",
+  "borrowings": "Borrowings",
+  "returns": "Returns",
+  "settings": "Settings",
+  "language": "Language",
+  "theme": "Theme",
+  "about": "About",
+  "contact": "Contact",
+  "help": "Help",
+
+  "menu": {
+    "home": "Home",
+    "examples": "Examples",
+    "profile": "Profile",
+    "tasks": "Tasks",
+    "info": "Info",
+    "log": "Log",
+    "cuti": "Leave",
+    "rekod": "Records",
+    "metadata": "Metadata",
+    "tempahan": "Room Booking",
+    "penggurusan": "Management",
+    "surat": "Letters",
+    "laporan": "Reports",
+    "tetapan": "Settings"
+  }
+
+
+}
