@@ -9,12 +9,24 @@ import themes from "devextreme/ui/themes";
 
 import App from "./App";
 import appInfo from "./app-info";
+// import i18n
 import i18n from "./i18n";
+// import toast
+import Toast from "vue-toastification"
+import "vue-toastification/dist/index.css"
 
 themes.initialized(() => {
     const app = createApp(App);
     app.use(router);
     app.config.globalProperties.$appInfo = appInfo;
     app.use(i18n);
+    app.use(Toast);
+    app.use(Toast, {
+            position: "top-right",
+            timeout: 3000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+    });
     app.mount('#app');
 });

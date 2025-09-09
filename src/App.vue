@@ -26,6 +26,8 @@ import {
   onBeforeUnmount,
   computed
 } from "vue";
+// import toast from "vue-toastification";
+import { initToast } from "@/services/ToastService"
 
 function getScreenSizeInfo() {
   const screenSizes = sizes();
@@ -54,6 +56,7 @@ export default {
 
     onMounted(() => {
       subscribe(screenSizeChanged);
+      initToast();
     });
 
     onBeforeUnmount(() => {
