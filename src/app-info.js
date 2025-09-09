@@ -1,3 +1,3 @@
 export default {
-  title: "Frontend"
+  title: "Perpustakaan Majlis Agama Islam"
 };

@@ -1,13 +1,14 @@
-import Tetapan from './views/Tetapan';
-import Laporan from './views/Laporan';
-import Surat from './views/Surat';
-import Penggurusan from './views/Penggurusan';
-import Tempahan from './views/Tempahan';
-import Metadata from './views/Metadata';
-import Rekod from './views/Rekod';
-import Cuti from './views/Cuti';
-import Log from './views/Log';
-import Info from './views/Info';
+import Tetapan from "./views/penggurusan-tetapan";
+import PenggurusanLaporan from "./views/penggurusan-laporan.vue";
+import PenggurusanSuratJaminan from "./views/penggurusan-surat-jaminan";
+import PenggurusanTempahanBilik from "./views/penggurusan-tempahan-bilik";
+import PenggurusanMetadata from "./views/penggurusan-metadata";
+import RekodPentadbiran from "./views/rekod-pentadbiran";
+import RekodSumberManusia from "./views/rekod-sumber-manusia";
+import RekodPentadbiran from "./views/rekod-pentadbiran";
+import PenggurusanCuti from "./views/penggurusan-cuti";
+import LogAktivitiKakitangan from "./views/log-aktiviti-kakitangan";
+import InfoSemasa from "./views/info-semasa";
 import auth from "./auth";
 import { createRouter, createWebHashHistory } from "vue-router";
 
@@ -16,6 +17,7 @@ import Profile from "./views/profile-page";
 import Tasks from "./views/tasks-page";
 import defaultLayout from "./layouts/side-nav-outer-toolbar";
 import simpleLayout from "./layouts/single-card";
+import PenggurusanTetapan from "./views/penggurusan-tetapan.vue";
 
 function loadView(view) {
   return () => import (/* webpackChunkName: "login" */ `./views/${view}.vue`)
@@ -110,7 +112,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Info
+      component: InfoSemasa
     }, 
     {
       path: "/log",
@@ -119,7 +121,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Log
+      component: LogAktivitiKakitangan
     }, 
     {
       path: "/cuti",
@@ -128,7 +130,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Cuti
+      component: PenggurusanCuti
     }, 
     {
       path: "/rekod",
@@ -137,7 +139,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Rekod
+      component: RekodPentadbiran
     }, 
     {
       path: "/metadata",
@@ -146,7 +148,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Metadata
+      component: PenggurusanMetadata
     }, 
     {
       path: "/tempahan",
@@ -155,7 +157,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Tempahan
+      component: PenggurusanTempahanBilik
     }, 
     {
       path: "/penggurusan",
@@ -164,7 +166,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Penggurusan
+      component: PenggurusanSuratJaminan
     }, 
     {
       path: "/surat",
@@ -173,7 +175,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Surat
+      component: PenggurusanSuratJaminan
     }, 
     {
       path: "/laporan",
@@ -182,7 +184,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Laporan
+      component: PenggurusanLaporan
     }, 
     {
       path: "/tetapan",
@@ -191,7 +193,7 @@ const router = new createRouter({
         requiresAuth: true,
         layout: defaultLayout
       },
-      component: Tetapan
+      component: PenggurusanTetapan
     }
   ],
   history: createWebHashHistory()
